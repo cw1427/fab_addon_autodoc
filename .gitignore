@@ -1,0 +1,11 @@
+*.pyc
+app.db
+./tmp
+./build/*
+./.idea
+./.idea/*
+env
+venv
+*.sublime*
+dist
+fab_addon_autodoc.egg-info

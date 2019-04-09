@@ -1,0 +1,4 @@
+include *.py
+recursive-include fab_addon_autodoc/static *.css *.js *.html
+recursive-include fab_addon_autodoc/templates *.css *.js *.html
+recursive-include fab_addon_autodoc/translations *

@@ -1,0 +1,97 @@
+{% extends "appbuilder/base.html" %}
+
+{% block head_css %}
+    {{super()}}
+{% endblock %}
+
+{% block content %}
+
+        <h1>
+            {% if title is defined -%}
+                {{title}}
+            {% else -%}
+                API Documentation
+            {% endif -%}
+        </h1>
+        <p>
+            <a type="button" class="btn btn-default" href="{{url_for('DocumentsView.list')}}">All Group</a>
+        </p>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Group: {{group}}</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        {% for doc in autodoc %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           REST API:  {{doc.rule|escape}}
+                        </div>
+                        <!-- .panel-heading -->
+                        <div class="panel-body">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#method_{{loop.index}}">Request Methods</a>
+                                        </h4>
+                                    </div>
+                                    <div id="method_{{loop.index}}" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            {% for method in doc.methods -%}
+                                               <ul>
+                                                <li>{{method}}</li>
+                                               </ul>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#args_{{loop.index}}">Request Args</a>
+                                        </h4>
+                                    </div>
+                                    <div id="args_{{loop.index}}" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            {% for arg in doc.args -%}
+                                               <li>
+                                                    <span class="argument">{{arg}}</span>
+                                                    <span class="default">{{doc.defaults[arg]}}</span>
+                                               </li>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#desc_{{loop.index}}">Request Description</a>
+                                        </h4>
+                                    </div>
+                                    <div id="desc_{{loop.index}}" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            {{ set }}
+                                            <p class="">{{doc.docstring|urlize}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <!-- .panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        {% endfor %}
+        </div>
+{% endblock %}
+
+
