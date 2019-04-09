@@ -7,7 +7,7 @@ Autodoc AddOn for Flask-AppBuilder
 
 - Install it::
 
-    pip install
+    pip install fab-addon-autodoc>=0.1.5
 
 - Develop and Test....
     fixing a bug for views import python3 compatebility
